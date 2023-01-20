@@ -1,0 +1,129 @@
+1.
+--exception handling in PLSQL
+DECLARE  
+   NID EMPLOYE3.ID%TYPE := 7;
+   NSALARY EMPLOYE3.SALARY%TYPE;  
+BEGIN  
+   SELECT SALARY INTO NSALARY  
+   FROM EMPLOYE3  
+   WHERE EMPID = NID;  
+DBMS_OUTPUT.PUT_LINE ('SALARY: ' || NSALARY);  
+EXCEPTION  
+   WHEN NO_DATA_FOUND THEN  
+      DBMS_OUTPUT.PUT_LINE('NO SUCH DATA IS PRESENT!');  
+   WHEN OTHERS THEN  
+      DBMS_OUTPUT.PUT_LINE('ERROR!');  
+END;
+
+2.
+--a code without exception
+DECLARE
+A NUMBER;
+B NUMBER;
+BEGIN
+A:= :ENTER_NUM1;
+B:= :ENTER_NUM2;
+DBMS_OUTPUT.PUT_LINE(A/B);
+END;
+
+3.
+--exception handling for divide by zero
+DECLARE
+A NUMBER;
+B NUMBER;
+BEGIN
+A:= :ENTER_NUM1;
+B:= :ENTER_NUM2;
+DBMS_OUTPUT.PUT_LINE(A/B);
+             EXCEPTION
+             WHEN ZERO_DIVIDE THEN
+             B:=2;
+             DBMS_OUTPUT.PUT_LINE(A/B);
+END;
+
+4.
+--exception handling for no data
+DECLARE  
+   nid employe3.id%type := 7;
+   nsalary employe3.salary%type;  
+BEGIN  
+   SELECT salary INTO  nsalary  
+   FROM EMPLOYE3  
+   WHERE EMPID = nid;  
+DBMS_OUTPUT.PUT_LINE ('Salary: ' || nsalary);  
+EXCEPTION  
+   WHEN no_data_found THEN  
+      dbms_output.put_line('No such data is present!');  
+   WHEN others THEN  
+      dbms_output.put_line('Error!');  
+END;
+
+5.
+--exception handling foe fetching multiple rows without record
+DECLARE
+EID NUMBER;
+BEGIN
+SELECT EMPID INTO EID FROM EMPLOYE3;
+EXCEPTION
+WHEN TOO_MANY_ROWS THEN
+DBMS_OUTPUT.PUT_LINE('FETCHING MULTIPLE ROWS');
+END;
+
+6.
+--exception handling for invalid data
+DECLARE
+V_CODE NUMBER;
+V_ERRM VARCHAR2(100);
+MYNO NUMBER(1);
+BEGIN
+MYNO:= :MYNO;
+EXCEPTION
+WHEN OTHERS THEN
+DBMS_OUTPUT.PUT_LINE('NOT VALID');
+END;
+
+7.
+--exception handling in PLSQL
+DECLARE
+V_CODE NUMBER;
+V_ERRM VARCHAR2(100);
+MYNO NUMBER(1);
+BEGIN
+MYNO:= :MYNO;
+EXCEPTION
+WHEN OTHERS THEN
+V_CODE:=SQLCODE;
+V_ERRM:=SQLERRM;
+DBMS_OUTPUT.PUT_LINE(V_CODE);
+DBMS_OUTPUT.PUT_LINE(V_ERRM);
+END;
+
+8.
+--exception handling for invalid voting age
+DECLARE
+AG NUMBER:=12;
+WRONG_AGE EXCEPTION;
+BEGIN
+IF (AG<18) THEN
+RAISE WRONG_AGE;
+END IF;
+EXCEPTION 
+WHEN WRONG_AGE THEN
+DBMS_OUTPUT.PUT_LINE('AGE CANNOT BE LESS THAN 18 FOR VOTING');
+END;
+
+9.
+--exception handling for invalid table values
+CREATE TABLE T12(
+A CHAR);
+INSERT INTO T12 VALUES('ASDHASFHIASFH')
+
+DECLARE  
+   ABRA_KA_DABRA EXCEPTION;
+PRAGMA EXCEPTION_INIT(ABRA_KA_DABRA,-12899);
+BEGIN  
+  INSERT INTO T12 VALUES('ASDHASFHIASFH');
+EXCEPTION  
+   WHEN ABRA_KA_DABRA THEN  
+   DBMS_OUTPUT.PUT_LINE('CHARACTER DALA JAYE KRIPYA KARKE');  
+END;

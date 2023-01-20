@@ -1,0 +1,87 @@
+1.
+--simple loop to print 10 numbers
+DECLARE
+ I NUMBER;
+BEGIN
+ I:=1;
+LOOP
+DBMS_OUTPUT.PUT_LINE(I);
+I:=I+1;
+EXIT WHEN I>10;
+END LOOP;
+END;
+
+2.
+--using if with loop to print 10 numbers
+DECLARE
+ I NUMBER(2);
+BEGIN
+ I:=1;
+LOOP
+   DBMS_OUTPUT.PUT_LINE(I);
+   I:=I+1;
+   IF I>10 THEN EXIT;
+   END IF;
+END LOOP;
+END;
+
+3.
+--using if with loop to print n numbers
+DECLARE
+ N NUMBER:=:ENTER;
+I NUMBER;
+BEGIN
+ I:=1;
+LOOP
+   DBMS_OUTPUT.PUT_LINE(I);
+   I:=I+1;
+   IF I>N THEN EXIT;
+   END IF;
+END LOOP;
+END;
+
+4.
+--taking user input to print table of a number using while loop
+DECLARE
+ I NUMBER:=:ENTER;
+ N NUMBER;
+ RESULT NUMBER;
+BEGIN
+ N:=1;
+WHILE N<=10
+LOOP
+   RESULT:=N*I;
+   DBMS_OUTPUT.PUT_LINE(RESULT); OR DBMS_OUTPUT.PUT_LINE(I||'*'||N||'='||RESULT);
+   N:=N+1;
+END LOOP;
+END;
+
+5.
+--using for loop to print table  
+DECLARE
+ I NUMBER:=:ENTER;
+ N NUMBER;
+ RESULT NUMBER;
+BEGIN
+FOR N IN 1..10
+LOOP
+   RESULT:=N*I;
+   DBMS_OUTPUT.PUT_LINE(RESULT);
+END LOOP;
+END;
+
+6.
+--using for loop to print numbers in reverse
+DECLARE
+ I NUMBER:=:ENTER;
+ N NUMBER;
+ RESULT NUMBER;
+BEGIN
+FOR N IN REVERSE 1..10
+LOOP
+   RESULT:=N*I;
+   DBMS_OUTPUT.PUT_LINE(RESULT);
+END LOOP;
+END;
+
+
